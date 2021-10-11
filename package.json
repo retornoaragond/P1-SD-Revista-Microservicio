@@ -22,11 +22,10 @@
   "homepage": "https://github.com/retornoaragond/P1-SD-Revista-Microservicio#readme",
   "dependencies": {
     "express": "^4.17.1"
-  }
-  ,
+  },
   "devDependencies": {
     "express": "^4.17.1",
-    "nodemon": "1.18.4"
+    "nodemon": "^2.0.13"
   },
   "engines": {
     "node": "14.x"
