@@ -40,7 +40,7 @@ app.get('/revista/:id', (req, res) => {
         res.json(revista);
 })
 
-app.get('/revista/assign', (req, res) => {
+app.get('/revistaass', (req, res) => {
     let com = []
     for (let c of revistas) {
         if (c.ilustrador_id === '' || c.ilustrador_id === 0 || c.ilustrador_id === '0') {
