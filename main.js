@@ -7,7 +7,7 @@ app.use(express.json())
 const port = process.env.PORT || 8085
 let revistas = []
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -40,16 +40,29 @@ app.get('/revista/:id', (req, res) => {
         res.json(revista);
 })
 
+app.get('/revista/assign', (req, res) => {
+    let com = []
+    for (let c of revistas) {
+        if (c.ilustrador_id === '' || c.ilustrador_id === 0 || c.ilustrador_id === '0') {
+            com.push(c);
+        } else {
+            res.send('We dont hava comics to assign');
+        }
+    }
+    res.json(com);
+
+})
+
 app.post('/revista', (req, res) => {
     let index = revistas.findIndex(i => i.id == req.params.id);
     if (index != -1)
-      res.status(404).send('Revista already exits'); 
+        res.status(404).send('Revista already exits');
     else {
-      revistas.push(req.body);
-      saveRevistas();
+        revistas.push(req.body);
+        saveRevistas();
     }
     res.status(200).send('Revista added');
-  })
+})
 
 app.put('/revista/:id', (req, res) => {
     let index = revistas.findIndex(i => i.id == req.params.id);
@@ -73,6 +86,6 @@ app.delete('/revista/:id', (req, res) => {
     res.status(200).send('Revista deleted');
 })
 
-app.listen(port, () => 
-  console.log(`Revistas Server listening on port ${port}`)
+app.listen(port, () =>
+    console.log(`Revistas Server listening on port ${port}`)
 )
