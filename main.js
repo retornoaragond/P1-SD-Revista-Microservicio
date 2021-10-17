@@ -41,13 +41,9 @@ app.get('/revista/:id', (req, res) => {
 })
 
 app.get('/revistaass', (req, res) => {
-    let com = [];
-    for (let c of revistas) {
-        if (c.ilustrador_id === '' || c.ilustrador_id === 0 || c.ilustrador_id === '0' || c.ilustrador_id === "0") {
-            com.push(c);
-        } else {
-            res.send('We dont have comics to assign');
-        }
+    let com = revistas.filter(i => i.ilustrador_id === -1)
+    if(com.length < 1){
+        res.send('We dont have comics to assign');
     }
     res.json(com);
 })
