@@ -7,7 +7,7 @@ app.use(express.json())
 const port = process.env.PORT || 8085
 let revistas = []
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -53,7 +53,7 @@ app.get('/revistaass', (req, res) => {
 })
 
 app.post('/revista', (req, res) => {
-    let index = revistas.findIndex(i => i.id == req.params.id);
+    let index = revistas.findIndex(i => i.id == req.body.id);
     if (index != -1)
         res.status(404).send('Revista already exits');
     else {
@@ -74,7 +74,7 @@ app.put('/revista/:id', (req, res) => {
     res.status(200).send('Revista updated');
 })
 
-app.delete('/revista/:id', (req, res) => {
+app.post('/revista/delete/:id', (req, res) => {
     let index = revistas.findIndex(i => i.id == req.params.id);
     if (index == -1)
         res.status(404).send('Revista not found');
